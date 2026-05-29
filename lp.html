@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BMW | The Ultimate Driving Machine</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      scroll-behavior:smooth;
+    }
+
+    :root{
+      --primary:#00aaff;
+      --secondary:#0b0b0b;
+      --glass:rgba(255,255,255,0.08);
+      --border:rgba(255,255,255,0.15);
+      --text:#ffffff;
+      --silver:#cfd3d8;
+    }
+
+    body{
+      font-family:'Montserrat',sans-serif;
+      background:#050505;
+      color:white;
+      overflow-x:hidden;
+    }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar{
+      width:10px;
+    }
+
+    ::-webkit-scrollbar-track{
+      background:#111;
+    }
+
+    ::-webkit-scrollbar-thumb{
+      background:linear-gradient(var(--primary),#005eff);
+      border-radius:20px;
+    }
+
+    /* BACKGROUND GLOW */
+    body::before{
+      content:'';
+      position:fixed;
+      width:600px;
+      height:600px;
+      background:radial-gradient(circle,var(--primary),transparent 70%);
+      top:-200px;
+      right:-200px;
+      opacity:0.15;
+      z-index:-1;
+      animation:float 8s ease-in-out infinite;
+    }
+
+    @keyframes float{
+      0%,100%{
+        transform:translateY(0px);
+      }
+      50%{
+        transform:translateY(30px);
+      }
+    }
+
+    /* NAVBAR */
+    nav{
+      position:fixed;
+      top:0;
+      width:100%;
+      z-index:1000;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:22px 7%;
+      backdrop-filter:blur(14px);
+      background:rgba(0,0,0,0.25);
+      border-bottom:1px solid rgba(255,255,255,0.08);
+    }
+
+    nav h1{
+      font-size:2rem;
+      font-weight:900;
+      letter-spacing:4px;
+    }
+
+    nav ul{
+      display:flex;
+      gap:35px;
+      list-style:none;
+    }
+
+    nav ul li a{
+      text-decoration:none;
+      color:white;
+      font-weight:500;
+      transition:0.3s;
+      position:relative;
+    }
+
+    nav ul li a::after{
+      content:'';
+      position:absolute;
+      left:0;
+      bottom:-8px;
+      width:0%;
+      height:2px;
+      background:var(--primary);
+      transition:0.3s;
+    }
+
+    nav ul li a:hover::after{
+      width:100%;
+    }
+
+    /* HERO SECTION */
+    .hero{
+      height:100vh;
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      overflow:hidden;
+    }
+
+    .hero video{
+      position:absolute;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      z-index:-2;
+    }
+
+    .overlay{
+      position:absolute;
+      width:100%;
+      height:100%;
+      background:linear-gradient(to bottom,
+      rgba(0,0,0,0.4),
+      rgba(0,0,0,0.8));
+      z-index:-1;
+    }
+
+    .hero-content{
+      max-width:900px;
+      animation:fadeUp 1.5s ease;
+    }
+
+    .hero h2{
+      font-size:5rem;
+      font-weight:900;
+      line-height:1.1;
+      margin-bottom:20px;
+      text-transform:uppercase;
+      letter-spacing:3px;
+    }
+
+    .hero p{
+      color:#ddd;
+      font-size:1.2rem;
+      margin-bottom:40px;
+    }
+
+    .hero-buttons{
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      padding:16px 34px;
+      border:none;
+      border-radius:50px;
+      font-size:1rem;
+      font-weight:700;
+      cursor:pointer;
+      transition:0.4s;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .primary-btn{
+      background:linear-gradient(90deg,var(--primary),#004cff);
+      color:white;
+      box-shadow:0 0 25px rgba(0,170,255,0.5);
+    }
+
+    .secondary-btn{
+      background:rgba(255,255,255,0.08);
+      backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,0.2);
+      color:white;
+    }
+
+    .btn:hover{
+      transform:translateY(-5px) scale(1.03);
+    }
+
+    /* SECTION */
+    section{
+      padding:110px 7%;
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:70px;
+    }
+
+    .section-title h3{
+      font-size:3rem;
+      font-weight:800;
+      margin-bottom:15px;
+    }
+
+    .section-title p{
+      color:#aaa;
+      max-width:700px;
+      margin:auto;
+    }
+
+    /* GLASS CARD */
+    .glass{
+      background:var(--glass);
+      border:1px solid var(--border);
+      backdrop-filter:blur(12px);
+      border-radius:25px;
+    }
+
+    /* MODELS */
+    .models-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:30px;
+    }
+
+    .car-card{
+      overflow:hidden;
+      transition:0.5s;
+      position:relative;
+    }
+
+    .car-card:hover{
+      transform:translateY(-10px);
+      box-shadow:0 0 40px rgba(0,170,255,0.2);
+    }
+
+    .car-card img{
+      width:100%;
+      height:240px;
+      object-fit:cover;
+      transition:0.5s;
+    }
+
+    .car-card:hover img{
+      transform:scale(1.08);
+    }
+
+    .car-info{
+      padding:25px;
+    }
+
+    .car-info h4{
+      font-size:1.8rem;
+      margin-bottom:12px;
+    }
+
+    .specs{
+      display:flex;
+      justify-content:space-between;
+      margin:20px 0;
+      color:#ccc;
+      font-size:0.95rem;
+    }
+
+    /* PERFORMANCE SECTION */
+    .performance{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+      gap:40px;
+      align-items:center;
+    }
+
+    .performance img{
+      width:100%;
+      border-radius:25px;
+    }
+
+    .performance-text h2{
+      font-size:3rem;
+      margin-bottom:20px;
+    }
+
+    .performance-text p{
+      color:#bbb;
+      line-height:1.8;
+      margin-bottom:30px;
+    }
+
+    /* INTERIOR */
+    .interior{
+      position:relative;
+      background:url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2000&auto=format&fit=crop') center/cover;
+      background-attachment:fixed;
+      border-radius:30px;
+      overflow:hidden;
+    }
+
+    .interior-overlay{
+      background:rgba(0,0,0,0.75);
+      padding:120px 60px;
+    }
+
+    .interior h2{
+      font-size:4rem;
+      margin-bottom:20px;
+    }
+
+    .interior p{
+      max-width:700px;
+      color:#ddd;
+      line-height:1.8;
+    }
+
+    /* TESTIMONIALS */
+    .testimonials{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:30px;
+    }
+
+    .testimonial{
+      padding:35px;
+      transition:0.4s;
+    }
+
+    .testimonial:hover{
+      transform:translateY(-8px);
+    }
+
+    .testimonial p{
+      color:#ddd;
+      line-height:1.7;
+      margin-bottom:25px;
+    }
+
+    .testimonial h5{
+      font-size:1.1rem;
+    }
+
+    /* CTA */
+    .cta{
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .cta::before{
+      content:'';
+      position:absolute;
+      width:500px;
+      height:500px;
+      background:radial-gradient(circle,var(--primary),transparent 70%);
+      opacity:0.1;
+      top:-100px;
+      left:50%;
+      transform:translateX(-50%);
+    }
+
+    .cta h2{
+      font-size:4rem;
+      margin-bottom:20px;
+      position:relative;
+    }
+
+    .cta p{
+      color:#bbb;
+      max-width:700px;
+      margin:auto auto 40px;
+      position:relative;
+    }
+
+    /* FOOTER */
+    footer{
+      background:#080808;
+      padding:50px 7%;
+      border-top:1px solid rgba(255,255,255,0.08);
+    }
+
+    .footer-content{
+      display:flex;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:20px;
+      align-items:center;
+    }
+
+    footer p{
+      color:#aaa;
+    }
+
+    .socials{
+      display:flex;
+      gap:20px;
+    }
+
+    .socials a{
+      color:white;
+      text-decoration:none;
+      transition:0.3s;
+    }
+
+    .socials a:hover{
+      color:var(--primary);
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp{
+      from{
+        opacity:0;
+        transform:translateY(40px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(70px);
+      transition:1s ease;
+    }
+
+    .reveal.active{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:992px){
+
+      .hero h2{
+        font-size:3.5rem;
+      }
+
+      .performance-text h2,
+      .cta h2,
+      .interior h2{
+        font-size:2.5rem;
+      }
+    }
+
+    @media(max-width:768px){
+
+      nav{
+        padding:18px 5%;
+      }
+
+      nav ul{
+        display:none;
+      }
+
+      .hero h2{
+        font-size:2.5rem;
+      }
+
+      .hero p{
+        font-size:1rem;
+      }
+
+      .section-title h3{
+        font-size:2.2rem;
+      }
+
+      .interior-overlay{
+        padding:80px 30px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <h1>BMW</h1>
+
+    <ul>
+      <li><a href="#models">Models</a></li>
+      <li><a href="#performance">Performance</a></li>
+      <li><a href="#luxury">Luxury</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+
+    <video autoplay muted loop playsinline>
+      <source src="https://cdn.coverr.co/videos/coverr-driving-on-a-rainy-night-1566502034316?download=1080p" type="video/mp4">
+    </video>
+
+    <div class="overlay"></div>
+
+    <div class="hero-content">
+      <h2>THE ULTIMATE DRIVING MACHINE</h2>
+
+      <p>
+        Precision engineering. Futuristic innovation. Pure performance.
+        Experience the next generation of BMW luxury.
+      </p>
+
+      <div class="hero-buttons">
+        <button class="btn primary-btn">
+          Build Your BMW
+        </button>
+
+        <button class="btn secondary-btn">
+          Explore Models
+        </button>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- FEATURED MODELS -->
+  <section id="models" class="reveal">
+
+    <div class="section-title">
+      <h3>Featured BMW Models</h3>
+
+      <p>
+        Explore BMW’s most iconic performance machines engineered for thrill,
+        comfort, and futuristic mobility.
+      </p>
+    </div>
+
+    <div class="models-grid">
+
+      <div class="car-card glass">
+        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=1400&auto=format&fit=crop" alt="BMW M4">
+
+        <div class="car-info">
+          <h4>BMW M4 Competition</h4>
+
+          <p>
+            A high-performance coupe blending motorsport DNA with luxury craftsmanship.
+          </p>
+
+          <div class="specs">
+            <span>503 HP</span>
+            <span>3.8s 0-60</span>
+            <span>AWD</span>
+          </div>
+
+          <button class="btn primary-btn">
+            Explore
+          </button>
+        </div>
+      </div>
+
+      <div class="car-card glass">
+        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1400&auto=format&fit=crop" alt="BMW i8">
+
+        <div class="car-info">
+          <h4>BMW i8 Vision</h4>
+
+          <p>
+            Futuristic hybrid performance designed with cinematic aerodynamics.
+          </p>
+
+          <div class="specs">
+            <span>369 HP</span>
+            <span>4.2s 0-60</span>
+            <span>Hybrid</span>
+          </div>
+
+          <button class="btn primary-btn">
+            Explore
+          </button>
+        </div>
+      </div>
+
+      <div class="car-card glass">
+        <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1400&auto=format&fit=crop" alt="BMW X7">
+
+        <div class="car-info">
+          <h4>BMW X7 Luxury</h4>
+
+          <p>
+            Full-size luxury SUV crafted for commanding presence and comfort.
+          </p>
+
+          <div class="specs">
+            <span>523 HP</span>
+            <span>Luxury SUV</span>
+            <span>7 Seats</span>
+          </div>
+
+          <button class="btn primary-btn">
+            Explore
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- PERFORMANCE -->
+  <section id="performance" class="reveal">
+
+    <div class="performance">
+
+      <div>
+        <img src="https://images.unsplash.com/photo-1494905998402-395d579af36f?q=80&w=1600&auto=format&fit=crop" alt="">
+      </div>
+
+      <div class="performance-text">
+        <h2>Performance Meets Innovation</h2>
+
+        <p>
+          BMW combines cutting-edge technology with precision performance engineering.
+          Adaptive suspension systems, intelligent driving modes, and electrified powertrains
+          redefine what luxury performance feels like.
+        </p>
+
+        <button class="btn primary-btn">
+          Discover Technology
+        </button>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- INTERIOR -->
+  <section id="luxury" class="reveal">
+
+    <div class="interior glass">
+
+      <div class="interior-overlay">
+
+        <h2>Luxury Inside Every Detail</h2>
+
+        <p>
+          Immerse yourself in handcrafted interiors featuring ambient lighting,
+          panoramic displays, premium leather seating, and AI-enhanced driver experiences.
+          Every BMW cabin is engineered to feel futuristic, elegant, and immersive.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="reveal">
+
+    <div class="section-title">
+      <h3>What Drivers Say</h3>
+
+      <p>
+        Experience why BMW owners describe every journey as unforgettable.
+      </p>
+    </div>
+
+    <div class="testimonials">
+
+      <div class="testimonial glass">
+        <p>
+          “Driving the BMW M series feels like piloting a futuristic machine.
+          The acceleration and comfort are unmatched.”
+        </p>
+
+        <h5>— Daniel Foster</h5>
+      </div>
+
+      <div class="testimonial glass">
+        <p>
+          “The interior craftsmanship is absolutely stunning. Every detail
+          feels premium and technologically advanced.”
+        </p>
+
+        <h5>— Sophia Williams</h5>
+      </div>
+
+      <div class="testimonial glass">
+        <p>
+          “BMW perfectly balances aggressive performance with elegant luxury.
+          It’s more than a car — it’s an experience.”
+        </p>
+
+        <h5>— Michael Carter</h5>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- CTA -->
+  <section class="cta reveal">
+
+    <h2>Design Your Dream BMW</h2>
+
+    <p>
+      Configure your perfect BMW with exclusive trims, performance packages,
+      and cutting-edge features crafted for your lifestyle.
+    </p>
+
+    <button class="btn primary-btn">
+      Build Your BMW
+    </button>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="footer-content">
+
+      <div>
+        <h2>BMW</h2>
+        <p>Luxury • Performance • Innovation</p>
+      </div>
+
+      <div class="socials">
+        <a href="#">Instagram</a>
+        <a href="#">YouTube</a>
+        <a href="#">Twitter</a>
+      </div>
+
+    </div>
+
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script>
+
+    // SCROLL REVEAL ANIMATION
+    const reveals = document.querySelectorAll('.reveal');
+
+    function revealOnScroll() {
+
+      reveals.forEach((element) => {
+
+        const windowHeight = window.innerHeight;
+        const revealTop = element.getBoundingClientRect().top;
+        const revealPoint = 100;
+
+        if(revealTop < windowHeight - revealPoint){
+          element.classList.add('active');
+        }
+
+      });
+
+    }
+
+    window.addEventListener('scroll', revealOnScroll);
+
+    revealOnScroll();
+
+    // PARALLAX EFFECT
+    window.addEventListener("scroll", () => {
+
+      const scroll = window.pageYOffset;
+
+      document.querySelector(".hero-content").style.transform =
+        `translateY(${scroll * 0.3}px)`;
+
+    });
+
+  </script>
+
+</body>
+</html>
