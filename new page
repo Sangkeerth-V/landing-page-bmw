@@ -1,0 +1,340 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BMW Landing Page</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, sans-serif;
+    }
+
+    body{
+      background:#000;
+      color:white;
+      overflow-x:hidden;
+    }
+
+    /* NAVBAR */
+
+    nav{
+      position:fixed;
+      width:100%;
+      top:0;
+      left:0;
+      padding:20px 60px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:rgba(0,0,0,0.4);
+      backdrop-filter:blur(10px);
+      z-index:1000;
+    }
+
+    nav h1{
+      font-size:32px;
+      letter-spacing:4px;
+    }
+
+    nav ul{
+      display:flex;
+      list-style:none;
+      gap:30px;
+    }
+
+    nav ul li a{
+      text-decoration:none;
+      color:white;
+      transition:0.3s;
+    }
+
+    nav ul li a:hover{
+      color:#00aaff;
+    }
+
+    /* HERO SECTION */
+
+    .hero{
+      height:100vh;
+      background:url('https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      position:relative;
+    }
+
+    .hero::before{
+      content:'';
+      position:absolute;
+      width:100%;
+      height:100%;
+      background:rgba(0,0,0,0.6);
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:1;
+      max-width:800px;
+      padding:20px;
+    }
+
+    .hero-content h2{
+      font-size:70px;
+      margin-bottom:20px;
+      font-weight:bold;
+    }
+
+    .hero-content p{
+      font-size:20px;
+      color:#ddd;
+      margin-bottom:30px;
+    }
+
+    .btn{
+      display:inline-block;
+      padding:15px 35px;
+      background:#00aaff;
+      color:white;
+      text-decoration:none;
+      border-radius:40px;
+      transition:0.3s;
+      font-weight:bold;
+    }
+
+    .btn:hover{
+      background:#0088cc;
+      transform:scale(1.05);
+    }
+
+    /* FEATURES */
+
+    .features{
+      padding:100px 60px;
+      text-align:center;
+    }
+
+    .features h2{
+      font-size:50px;
+      margin-bottom:50px;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:30px;
+    }
+
+    .card{
+      background:#111;
+      border-radius:20px;
+      overflow:hidden;
+      transition:0.4s;
+    }
+
+    .card:hover{
+      transform:translateY(-10px);
+    }
+
+    .card img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+    }
+
+    .card-content{
+      padding:25px;
+    }
+
+    .card-content h3{
+      margin-bottom:15px;
+      font-size:28px;
+    }
+
+    .card-content p{
+      color:#bbb;
+      line-height:1.6;
+    }
+
+    /* CTA */
+
+    .cta{
+      padding:120px 40px;
+      text-align:center;
+      background:linear-gradient(to right,#001122,#003366);
+    }
+
+    .cta h2{
+      font-size:55px;
+      margin-bottom:20px;
+    }
+
+    .cta p{
+      color:#ccc;
+      margin-bottom:30px;
+      font-size:18px;
+    }
+
+    /* FOOTER */
+
+    footer{
+      padding:30px;
+      text-align:center;
+      background:#050505;
+      color:#888;
+    }
+
+    /* RESPONSIVE */
+
+    @media(max-width:768px){
+
+      nav{
+        padding:20px;
+      }
+
+      nav ul{
+        display:none;
+      }
+
+      .hero-content h2{
+        font-size:45px;
+      }
+
+      .features{
+        padding:80px 20px;
+      }
+
+      .features h2{
+        font-size:38px;
+      }
+
+      .cta h2{
+        font-size:40px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+
+  <nav>
+    <h1>BMW</h1>
+
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Models</a></li>
+      <li><a href="#">Performance</a></li>
+      <li><a href="#">Luxury</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <h2>THE ULTIMATE DRIVING MACHINE</h2>
+
+      <p>
+        Experience luxury, innovation, and performance like never before.
+      </p>
+
+      <a href="#" class="btn">
+        Build Your BMW
+      </a>
+
+    </div>
+
+  </section>
+
+  <!-- FEATURES -->
+
+  <section class="features">
+
+    <h2>Featured Models</h2>
+
+    <div class="cards">
+
+      <div class="card">
+
+        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop">
+
+        <div class="card-content">
+          <h3>BMW M4</h3>
+
+          <p>
+            Powerful sports coupe with premium performance and aggressive styling.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1200&auto=format&fit=crop">
+
+        <div class="card-content">
+          <h3>BMW X7</h3>
+
+          <p>
+            Luxury SUV designed for comfort, innovation, and modern elegance.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <img src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?q=80&w=1200&auto=format&fit=crop">
+
+        <div class="card-content">
+          <h3>BMW i8</h3>
+
+          <p>
+            Futuristic hybrid supercar blending electric efficiency with speed.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- CTA -->
+
+  <section class="cta">
+
+    <h2>Design Your Dream BMW</h2>
+
+    <p>
+      Customize your perfect BMW with luxury features and cutting-edge technology.
+    </p>
+
+    <a href="#" class="btn">
+      Explore Now
+    </a>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+    © 2026 BMW Landing Page | Luxury • Performance • Innovation
+  </footer>
+
+</body>
+</html>
+```
