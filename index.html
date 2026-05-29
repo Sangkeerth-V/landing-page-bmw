@@ -1,206 +1,590 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <title>BMW Landing Page</title>
+  <title>BMW Experience</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
+
     *{
       margin:0;
       padding:0;
       box-sizing:border-box;
-      font-family:Arial, sans-serif;
+      font-family:'Poppins',sans-serif;
+      scroll-behavior:smooth;
     }
 
     body{
       background:#000;
-      color:white;
+      color:#fff;
+      overflow-x:hidden;
     }
 
+    /* NAVBAR */
+
     header{
-      width:100%;
-      padding:20px 8%;
-      position:absolute;
+      position:fixed;
       top:0;
       left:0;
+      width:100%;
+      padding:22px 8%;
       display:flex;
       justify-content:space-between;
       align-items:center;
-      z-index:100;
+      z-index:1000;
+      background:rgba(0,0,0,0.4);
+      backdrop-filter:blur(10px);
     }
 
     .logo{
-      font-size:28px;
-      font-weight:bold;
-      letter-spacing:2px;
+      font-size:32px;
+      font-weight:800;
+      letter-spacing:3px;
     }
 
     nav a{
-      color:white;
       text-decoration:none;
-      margin-left:25px;
+      color:white;
+      margin-left:30px;
       font-size:16px;
+      transition:0.3s;
+      position:relative;
+    }
+
+    nav a::after{
+      content:'';
+      position:absolute;
+      left:0;
+      bottom:-5px;
+      width:0%;
+      height:2px;
+      background:#00aaff;
       transition:0.3s;
     }
 
-    nav a:hover{
-      color:#00aaff;
+    nav a:hover::after{
+      width:100%;
     }
 
+    /* HERO SECTION */
+
     .hero{
-      width:100%;
       height:100vh;
       background:
-      linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)),
-      url('https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=1600&auto=format&fit=crop')
+      linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.75)),
+      url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1800&auto=format&fit=crop')
       center/cover no-repeat;
 
       display:flex;
-      justify-content:center;
       align-items:center;
-      text-align:center;
-      padding:20px;
+      padding:0 8%;
     }
 
     .hero-content{
       max-width:700px;
+      animation:fadeIn 1.5s ease;
     }
 
     .hero h1{
-      font-size:70px;
+      font-size:80px;
+      line-height:1.1;
       margin-bottom:20px;
-      letter-spacing:3px;
+      font-weight:800;
     }
 
     .hero p{
       font-size:20px;
-      line-height:1.6;
-      margin-bottom:35px;
       color:#ddd;
+      line-height:1.8;
+      margin-bottom:35px;
+    }
+
+    .hero-buttons{
+      display:flex;
+      gap:20px;
+      flex-wrap:wrap;
     }
 
     .btn{
-      display:inline-block;
       padding:15px 35px;
+      border-radius:6px;
+      text-decoration:none;
+      font-weight:600;
+      transition:0.4s;
+      display:inline-block;
+    }
+
+    .btn-primary{
       background:#00aaff;
       color:white;
-      text-decoration:none;
-      border-radius:5px;
-      font-size:18px;
-      transition:0.3s;
     }
 
-    .btn:hover{
+    .btn-primary:hover{
       background:#0088cc;
-      transform:scale(1.05);
+      transform:translateY(-5px);
     }
+
+    .btn-secondary{
+      border:2px solid white;
+      color:white;
+    }
+
+    .btn-secondary:hover{
+      background:white;
+      color:black;
+    }
+
+    /* STATS */
+
+    .stats{
+      background:#0d0d0d;
+      padding:70px 8%;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:30px;
+      text-align:center;
+    }
+
+    .stat h2{
+      font-size:45px;
+      color:#00aaff;
+      margin-bottom:10px;
+    }
+
+    .stat p{
+      color:#ccc;
+    }
+
+    /* MODELS */
+
+    .models{
+      padding:100px 8%;
+      background:#111;
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:60px;
+    }
+
+    .section-title h2{
+      font-size:50px;
+      margin-bottom:15px;
+    }
+
+    .section-title p{
+      color:#bbb;
+    }
+
+    .model-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:35px;
+    }
+
+    .model-card{
+      background:#1a1a1a;
+      border-radius:15px;
+      overflow:hidden;
+      transition:0.4s;
+    }
+
+    .model-card:hover{
+      transform:translateY(-10px);
+    }
+
+    .model-card img{
+      width:100%;
+      height:230px;
+      object-fit:cover;
+    }
+
+    .model-content{
+      padding:25px;
+    }
+
+    .model-content h3{
+      margin-bottom:10px;
+      font-size:28px;
+    }
+
+    .model-content p{
+      color:#ccc;
+      line-height:1.7;
+      margin-bottom:20px;
+    }
+
+    .price{
+      color:#00aaff;
+      font-size:22px;
+      font-weight:600;
+    }
+
+    /* PERFORMANCE */
+
+    .performance{
+      padding:120px 8%;
+      background:
+      linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.8)),
+      url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1800&auto=format&fit=crop')
+      center/cover fixed;
+      text-align:center;
+    }
+
+    .performance h2{
+      font-size:60px;
+      margin-bottom:20px;
+    }
+
+    .performance p{
+      max-width:800px;
+      margin:auto;
+      line-height:1.9;
+      color:#ddd;
+      font-size:18px;
+    }
+
+    /* FEATURES */
 
     .features{
-      padding:80px 8%;
-      background:#111;
+      padding:100px 8%;
+      background:#0b0b0b;
+    }
+
+    .feature-grid{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
       gap:30px;
     }
 
-    .card{
-      background:#1a1a1a;
-      padding:30px;
-      border-radius:10px;
-      text-align:center;
-      transition:0.3s;
+    .feature-card{
+      background:#151515;
+      padding:35px;
+      border-radius:15px;
+      transition:0.4s;
     }
 
-    .card:hover{
+    .feature-card:hover{
       transform:translateY(-10px);
+      background:#1d1d1d;
     }
 
-    .card h3{
+    .feature-card h3{
       margin-bottom:15px;
       color:#00aaff;
+      font-size:24px;
     }
+
+    .feature-card p{
+      color:#ccc;
+      line-height:1.8;
+    }
+
+    /* CTA */
+
+    .cta{
+      padding:120px 8%;
+      text-align:center;
+      background:#111;
+    }
+
+    .cta h2{
+      font-size:55px;
+      margin-bottom:20px;
+    }
+
+    .cta p{
+      color:#ccc;
+      margin-bottom:35px;
+      font-size:18px;
+    }
+
+    /* FOOTER */
 
     footer{
       background:#000;
+      padding:30px;
       text-align:center;
-      padding:20px;
-      color:#aaa;
+      color:#777;
+      border-top:1px solid #222;
     }
 
-    @media(max-width:768px){
+    /* ANIMATION */
+
+    @keyframes fadeIn{
+      from{
+        opacity:0;
+        transform:translateY(40px);
+      }
+
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    /* RESPONSIVE */
+
+    @media(max-width:900px){
+
+      nav{
+        display:none;
+      }
 
       .hero h1{
-        font-size:42px;
+        font-size:50px;
+      }
+
+      .performance h2,
+      .cta h2,
+      .section-title h2{
+        font-size:38px;
+      }
+    }
+
+    @media(max-width:600px){
+
+      .hero{
+        text-align:center;
+        justify-content:center;
+      }
+
+      .hero-buttons{
+        justify-content:center;
+      }
+
+      .hero h1{
+        font-size:40px;
       }
 
       .hero p{
         font-size:16px;
       }
-
-      nav{
-        display:none;
-      }
     }
+
   </style>
 </head>
 
 <body>
 
+  <!-- NAVBAR -->
+
   <header>
+
     <div class="logo">BMW</div>
 
     <nav>
       <a href="#">Home</a>
-      <a href="#">Models</a>
-      <a href="#">Performance</a>
-      <a href="#">Contact</a>
+      <a href="#models">Models</a>
+      <a href="#features">Features</a>
+      <a href="#performance">Performance</a>
+      <a href="#contact">Contact</a>
     </nav>
+
   </header>
+
+  <!-- HERO -->
 
   <section class="hero">
 
     <div class="hero-content">
-      <h1>THE ULTIMATE DRIVING MACHINE</h1>
+
+      <h1>THE FUTURE OF LUXURY DRIVING</h1>
 
       <p>
-        Experience luxury, innovation, and performance with BMW.
-        Crafted for those who demand excellence on every road.
+        Discover BMW’s next generation of performance vehicles engineered
+        with cutting-edge innovation, intelligent technology, and unmatched luxury.
       </p>
 
-      <a href="#" class="btn">Explore Now</a>
+      <div class="hero-buttons">
+        <a href="#" class="btn btn-primary">Explore Models</a>
+
+        <a href="#" class="btn btn-secondary">Book Test Drive</a>
+      </div>
+
     </div>
 
   </section>
 
-  <section class="features">
+  <!-- STATS -->
 
-    <div class="card">
-      <h3>Luxury Interior</h3>
-      <p>
-        Premium comfort with futuristic design and intelligent technology.
-      </p>
+  <section class="stats">
+
+    <div class="stat">
+      <h2>523HP</h2>
+      <p>Maximum Power</p>
     </div>
 
-    <div class="card">
-      <h3>High Performance</h3>
-      <p>
-        Engineered for speed, precision, and unforgettable driving dynamics.
-      </p>
+    <div class="stat">
+      <h2>3.2s</h2>
+      <p>0-100 km/h</p>
     </div>
 
-    <div class="card">
-      <h3>Advanced Technology</h3>
-      <p>
-        Connected features and smart systems built for modern driving.
-      </p>
+    <div class="stat">
+      <h2>320km/h</h2>
+      <p>Top Speed</p>
+    </div>
+
+    <div class="stat">
+      <h2>100%</h2>
+      <p>Luxury Experience</p>
     </div>
 
   </section>
+
+  <!-- MODELS -->
+
+  <section class="models" id="models">
+
+    <div class="section-title">
+      <h2>Featured Models</h2>
+
+      <p>
+        Designed for passion, crafted for perfection.
+      </p>
+    </div>
+
+    <div class="model-grid">
+
+      <div class="model-card">
+
+        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=1600&auto=format&fit=crop" alt="BMW M4">
+
+        <div class="model-content">
+          <h3>BMW M4</h3>
+
+          <p>
+            Aggressive design paired with motorsport engineering and thrilling performance.
+          </p>
+
+          <div class="price">$78,000</div>
+        </div>
+
+      </div>
+
+      <div class="model-card">
+
+        <img src="https://images.unsplash.com/photo-1494905998402-395d579af36f?q=80&w=1600&auto=format&fit=crop" alt="BMW i8">
+
+        <div class="model-content">
+          <h3>BMW i8</h3>
+
+          <p>
+            Futuristic hybrid sports car combining sustainability with iconic styling.
+          </p>
+
+          <div class="price">$145,000</div>
+        </div>
+
+      </div>
+
+      <div class="model-card">
+
+        <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1600&auto=format&fit=crop" alt="BMW X7">
+
+        <div class="model-content">
+          <h3>BMW X7</h3>
+
+          <p>
+            Premium luxury SUV delivering comfort, innovation, and commanding road presence.
+          </p>
+
+          <div class="price">$96,000</div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- PERFORMANCE -->
+
+  <section class="performance" id="performance">
+
+    <h2>Engineered For Pure Performance</h2>
+
+    <p>
+      Every BMW vehicle is crafted with precision engineering,
+      advanced aerodynamics, and intelligent driving systems
+      to deliver an unforgettable driving experience on every road.
+    </p>
+
+  </section>
+
+  <!-- FEATURES -->
+
+  <section class="features" id="features">
+
+    <div class="section-title">
+      <h2>Advanced Features</h2>
+
+      <p>
+        Technology designed to elevate every journey.
+      </p>
+    </div>
+
+    <div class="feature-grid">
+
+      <div class="feature-card">
+        <h3>Digital Cockpit</h3>
+
+        <p>
+          Immersive displays with AI-assisted controls and real-time navigation systems.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <h3>Adaptive Suspension</h3>
+
+        <p>
+          Intelligent suspension adjusts dynamically for maximum comfort and handling.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <h3>Connected Drive</h3>
+
+        <p>
+          Stay connected with advanced smartphone integration and remote vehicle access.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <h3>Hybrid Innovation</h3>
+
+        <p>
+          Sustainable engineering meets powerful performance with BMW hybrid technology.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- CTA -->
+
+  <section class="cta" id="contact">
+
+    <h2>Experience BMW Today</h2>
+
+    <p>
+      Book your exclusive test drive and feel the future of luxury performance.
+    </p>
+
+    <a href="#" class="btn btn-primary">Schedule Now</a>
+
+  </section>
+
+  <!-- FOOTER -->
 
   <footer>
-    <p>© 2026 BMW Landing Page</p>
+    <p>© 2026 BMW Luxury Experience. All Rights Reserved.</p>
   </footer>
 
 </body>
